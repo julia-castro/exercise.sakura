@@ -1,8 +1,8 @@
-maxBranches = 150
+maxBranches = 500
 
 function Sakura() {
   this.branchCount = 0
-  this.trunk = new Branch(Math.random() * 10, Math.random() / 2, 0, this)
+  this.trunk = new Branch(Math.random(), Math.random(), 0, this)
 
   this.canvas = document.getElementById('canvas')
   this.canvas.width = this.canvas.clientWidth
@@ -47,23 +47,21 @@ function Branch(branchLength, thickness, angle, tree) {
 
 Branch.prototype.tick = function(turtle) {
   //grows branch by a random amount
-  this.branchLength += Math.random() / 10
-  this.thickness += Math.random() / 100
-  this.angle += Math.random() / 20
+  this.branchLength += Math.random() / 5
+  this.thickness += Math.random() / 50
+  this.angle += Math.random() / 150
 
   //sprouts new children 0.5% of the time
   if (Math.random() <= .005) {
-    var newBranch = new Branch(Math.random(), Math.random() / 100, Math.random() * -50, this.tree)
+    var newBranch = new Branch(Math.random(), Math.random(), (Math.random() * 90) - 45, this.tree)
     this.children.push(newBranch)
   }
 
   this.draw(turtle)
 
-  //calls tick on all its children
-  if (this.tree.branchCount < maxBranches) {
-    for (i = 0; i < this.children.length; i++) {
-      this.children[i].tick(turtle.spawn())
-    }
+  var i = this.children.length;
+  while (--i >= 0) {
+    this.children[i].tick(turtle.spawn())
   }
 
 }
