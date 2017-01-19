@@ -1,4 +1,4 @@
-maxBranches = 500
+maxBranches = 1000
 
 function Sakura() {
   this.branchCount = 0
@@ -42,7 +42,6 @@ function Branch(branchLength, thickness, angle, tree) {
   this.children = []
 
   this.tree.branchCount += 1
-  console.log(this.tree.branchCount)
 }
 
 Branch.prototype.tick = function(turtle) {
