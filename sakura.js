@@ -15,14 +15,12 @@ function Sakura() {
 }
 
 Sakura.prototype.tick = function() {
-  //requests another animation frame
   window.requestAnimationFrame(this.tick);
 
   var turtle = new Turtle()
   turtle.x = this.canvas.width / 2
   turtle.y = this.canvas.height
 
-  //calls tick on the tree's trunk
   if (this.branchCount < maxBranches) {
     this.draw()
     this.trunk.tick(turtle)
@@ -45,12 +43,10 @@ function Branch(branchLength, thickness, angle, tree) {
 }
 
 Branch.prototype.tick = function(turtle) {
-  //grows branch by a random amount
   this.branchLength += Math.random() / 5
   this.thickness += Math.random() / 50
   this.angle += Math.random() / 150
 
-  //sprouts new children 0.5% of the time
   if (Math.random() <= .005) {
     var newBranch = new Branch(Math.random(), Math.random(), (Math.random() * 90) - 45, this.tree)
     this.children.push(newBranch)
